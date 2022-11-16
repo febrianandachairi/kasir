@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+</br>
+<div class="container">
+    <div class="card">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleInputNama" class="form-label">Nama</label>
+                <input type="text" class="form-control" name="nama" value="{{ get_produk.nama }}" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputkategori" class="form-label">Kategori</label>
+                <select name="kategori" class="form-select" aria-label="Default select example">
+                    {% for kategori in kategori %}
+                        {% if get_produk.Kategori == kategori %}
+                            <option value="{{ kategori.nama }}" selected="selected">{{ kategori.nama }}</option>
+                        {% else %}
+                            <option value="{{ kategori.nama }}">{{ kategori.nama }}</option>        
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputJumlah" class="form-label">Jumlah</label>
+                <input type="text" class="form-control" name="jumlah" value="{{ get_produk.jumlah }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Deskripsi</label>
+                <textarea name="deskripsi" class="form-control" placeholder="type for description your product....">{{ get_produk.deskripsi }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
